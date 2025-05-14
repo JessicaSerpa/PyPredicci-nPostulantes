@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNMSM - PredictU</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header_footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleUNMSM.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Staatliches&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">PREDICT<span>U</span></div>
+            <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="#">Universidades</a></li>
+                <li><a href="#">Estadísticas</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-universidad">
+        <section class="banner">
+            <img src="{{ url_for('static', filename='sanMarcos.png') }}" alt="UNMSM" />
+            <div class="banner-texto">
+                <h1>Universidad Nacional Mayor de San Marcos</h1>
+                <p>Consulta los puntajes necesarios para postular a las distintas carreras.</p>
+            </div>
+        </section>
+
+        <section class="puntajes">
+            <h2>Puntajes por carrera (último proceso de admisión)</h2>
+            <table class="tabla-puntajes">
+                <thead>
+                    <tr>
+                        <th>Carrera</th>
+                        <th>Área</th>
+                        <th>Puntaje Mínimo</th>
+                        <th>Puntaje Máximo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Medicina</td>
+                        <td>Área de Ciencias de la Salud</td>
+                        <td>1480</td>
+                        <td>1860</td>
+                    </tr>
+                    <tr>
+                        <td>Ingeniería Industrial</td>
+                        <td>Área de Ingenierías</td>
+                        <td>1350</td>
+                        <td>1650</td>
+                    </tr>
+                    <tr>
+                        <td>Derecho</td>
+                        <td>Área de Humanidades</td>
+                        <td>1250</td>
+                        <td>1530</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="analisis">
+            <h2>¿Qué significan estos puntajes?</h2>
+            <p>
+                Los puntajes reflejan el rendimiento de los postulantes en los últimos procesos de admisión. El puntaje
+                mínimo indica cuál fue el último puntaje que permitió el ingreso a determinada carrera, mientras que el
+                máximo muestra el mejor puntaje obtenido. Esta información puede ayudarte a fijar una meta realista y
+                evaluar tus probabilidades de ingreso.
+            </p>
+        </section>
+
+        <section class="dashboard">
+            <h2>Análisis de Ingresantes</h2>
+            <p>Ruta test:</p>
+            <img src="/static/img/top_carreras.png" alt="Test gráfico directo">
+            <img src="{{ url_for('static', filename='img/top_carreras.png') }}" alt="Top carreras">
+            <img src="{{ url_for('static', filename='img/ingresantes_periodo.png') }}" alt="Distribución por periodo">
+            <img src="{{ url_for('static', filename='img/evolucion_top5.png') }}" alt="Evolución por carrera">
+        </section>
+
+
+        <section class="tabla-ingresantes">
+            <div class="filtro">
+                <label for="periodoFiltro">PERÍODO:</label>
+                <select class="periodoFiltro" id="periodoFiltro">
+                    <option value="2024-2" selected>2024-2</option>
+                    <option value="2024-1">2024-1</option>
+                    <option value="2023-2">2023-2</option>
+                </select>
+            </div>
+
+            <table id="tabla-ingresantes" class="display" >
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Apellidos</th>
+                        <th>Nombres</th>
+                        <th>Escuela Profesional</th>
+                        <th>Puntaje final</th>
+                        <th>Mérito Alcanzado</th>
+                        <th>Observaciones</th>
+                        <th>Periodo</th>
+                        <th>Escuela Segunda Opción</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h3>PredictU</h3>
+                <p>Plataforma educativa para ayudarte a tomar decisiones estratégicas sobre tu futuro universitario.</p>
+            </div>
+            <div class="footer-section links">
+                <h4>Enlaces útiles</h4>
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="#">Universidades</a></li>
+                    <li><a href="#">Estadísticas</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h4>Contacto</h4>
+                <p>Email: soporte@predictu.pe</p>
+                <p>Teléfono: +51 999 123 456</p>
+                <p>Dirección: Lima, Perú</p>
+            </div>
+
+            <div class="footer-section social">
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733547.png" alt="Facebook"></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733579.png" alt="Twitter"></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733558.png" alt="Instagram"></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/3536/3536505.png" alt="LinkedIn"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PredictU. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        let tabla;
+
+        function cargarTabla(periodo = "2024-2") {
+            if (tabla) {
+                tabla.destroy();
+            }
+
+            tabla = $('#tabla-ingresantes').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: {
+                    url: "/data",
+                    data: { periodo: periodo }
+                },
+                pageLength: 10,
+                language: {
+                    search: "Buscar:",
+                    paginate: {
+                        previous: "Anterior",
+                        next: "Siguiente"
+                    },
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ ingresos",
+                    infoEmpty: "No hay datos disponibles",
+                    zeroRecords: "No se encontraron registros"
+                },
+                columns: [
+                    { data: "Código" },
+                    { data: "Apellidos" },
+                    { data: "Nombres" },
+                    { data: "Escuela Profesional" },
+                    { data: "Puntaje final" },
+                    { data: "Mérito Alcanzado" },
+                    { data: "Observaciones" },
+                    { data: "Periodo" },
+                    { data: "Escuela Segunda Opción" }
+                ]
+            });
+        }
+
+        $(document).ready(function () {
+            cargarTabla();
+
+            $('#periodoFiltro').on('change', function () {
+                const periodo = $(this).val();
+                cargarTabla(periodo);
+            });
+
+            const toggle = document.getElementById("menu-toggle");
+            const navLinks = document.getElementById("nav-links");
+            toggle.addEventListener("click", () => {
+                navLinks.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+
+</html>

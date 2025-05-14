@@ -1,0 +1,274 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #181534;
+}
+
+.navbar
+{
+    background-color: #800000;
+}
+
+.footer
+{
+  background-color: #800000;
+}
+
+.main-universidad
+{
+  width: 100%;
+  margin: auto;
+  padding-bottom: 60px;
+}
+
+.banner
+{
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.banner img
+{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4);
+}
+
+.banner-texto
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  width: 70%;
+}
+
+.banner-texto h1
+{
+  font-family: 'Staatliches', sans-serif;
+  font-size: 3.2vw;
+  margin-bottom: 10px;
+  letter-spacing: 3px;
+}
+
+.banner-texto p {
+  font-size: 1.3vw;
+}
+
+.puntajes h2,
+.analisis h2
+{
+  font-family: 'Staatliches', sans-serif;
+  font-size: 2.5vw;
+  text-align: center;
+  margin: 40px 0 20px;
+  color: #800000;
+
+}
+
+.tabla-puntajes
+{
+  width: 70%;
+  border-collapse: separate;
+  margin: 20px auto;
+  border-radius: 20px;
+  border-spacing: 0;
+
+  background: #ffffff;
+  box-shadow:  20px 20px 60px #d9d9d9,
+               -20px -20px 60px #ffffff;
+}
+
+.tabla-puntajes th,
+.tabla-puntajes td
+{
+  padding: 15px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 1vw;
+  border: none;
+}
+
+.tabla-puntajes th
+{
+  background-color: #800000;
+  color: #fff;
+  font-family: "Staatliches", sans-serif;
+  font-size: 1.2vw;
+  letter-spacing: 2px;
+}
+
+.tabla-puntajes thead th:first-child
+{
+  border-top-left-radius: 20px;
+}
+
+.tabla-puntajes thead th:last-child
+{
+  border-top-right-radius: 20px;
+}
+
+.tabla-puntajes tr:nth-child(even)
+{
+  background-color: #f3f3f3;
+}
+
+.analisis
+{
+  margin-top: 70px;
+  text-align: center;
+  padding: 0 5%;
+
+}
+
+.analisis p
+{
+  font-size: 1vw;
+  max-width: 800px;
+  margin: auto;
+  color: #333;
+}
+
+.dashboard
+{
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+.dashboard h2
+{
+  font-family: "Staatliches", sans-serif;
+  font-size: 2.5vw;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #800000;
+}
+
+.grafico
+{
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.grafico img
+{
+  max-width: 90%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-ingresantes
+{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.filtro
+{
+  width: 30%;
+  margin-bottom: 20px;
+  color: #800000;
+}
+
+.filtro label
+{
+  font-size: 1.3vw;
+  font-family: "Staatliches", sans-serif;
+
+}
+
+.tabla-ingresantes select
+{
+  border: none !important;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow:  5px 5px 20px #d9d9d9,
+               -5px -5px 20px #ffffff;
+  width: 30%;
+  height: 40px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-left: 1rem;
+
+  font-size: 1vw;
+}
+
+.tabla-ingresantes select:focus
+{
+  outline: none;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .banner
+  {
+    height: 180px;
+  }
+
+  .banner-texto h1
+  {
+    font-size: 5vw;
+  }
+
+  .banner-texto p
+  {
+    font-size: 3.5vw;
+  }
+
+  .puntajes h2,
+  .analisis h2
+  {
+    font-size: 5vw;
+  }
+
+  .tabla-puntajes th,
+  .tabla-puntajes td
+  {
+    font-size: 2.5vw;
+    padding: 10px;
+  }
+
+  .analisis p
+  {
+    font-size: 3vw;
+  }
+
+  .dashboard h2
+  {
+    font-size: 5vw;
+  }
+
+  .filtro
+  {
+    width: 40%;
+    margin-bottom: 20px;
+    color: #800000;
+  }
+
+  .filtro label
+  {
+    font-size: 3vw;
+  }
+
+  .tabla-ingresantes select
+  {
+    width: 50%;
+    height: 40px;
+    margin-left: 1rem;
+    padding-left: 1rem;
+
+    font-size: 2vw;
+  }
+}
+

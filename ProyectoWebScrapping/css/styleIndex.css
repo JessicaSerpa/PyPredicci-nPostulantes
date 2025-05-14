@@ -1,0 +1,460 @@
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body
+{
+  background: #fff;
+}
+
+.contenedorPrincipal
+{
+  /*border: 1px solid red;*/
+  width: 90%;
+  margin: 0 auto;
+}
+
+.textoIntro
+{
+  margin-top: 5%;
+}
+
+.textoIntro h2
+{
+  font-family: "Staatliches", sans-serif;
+  font-size: 3vw;
+  letter-spacing: 3px;
+  text-align: center;
+  color: #181534;
+}
+
+.textoIntro p
+{
+  font-family: "Roboto", sans-serif;
+  font-size: 1vw;
+  font-weight: 300;
+  letter-spacing: 1px;
+  width: 90%;
+  margin: 2% auto;
+  text-align: center;
+}
+
+.contenedorCards
+{
+  /*border: 1px solid black;*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+}
+
+.card
+{
+  /*border: 1px solid blue;*/
+  width: 30%;
+
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 13px 13px 30px #e0e0e0,
+    -13px -13px 30px #ffffff;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover
+{
+  transform: scale(1.05);
+}
+
+.card picture img
+{
+  width: 100%;
+  border-radius: 15px;
+
+}
+
+.button
+{
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin: 3% 30%;
+  background-color: #fff;
+  color: #000;
+  width: 40%;
+  height: 2.9em;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  text-align: right;
+  transition: all 0.6s ease;
+  font-size: 1vw;
+
+  box-shadow: 11px 11px 40px #e0e0e0,
+    -11px -11px 40px #ffffff;
+}
+
+.button:hover
+{
+  background-color: #181534;
+  cursor: pointer;
+  color: #fff;
+
+  transform: scale(1.05);
+}
+
+.button svg
+{
+  width: 1.6em;
+  margin: -0.2em 0.8em 1em;
+  position: absolute;
+  display: flex;
+  transition: all 0.6s ease;
+}
+
+.button:hover svg
+{
+  transform: translateX(7px);
+  color: #fff;
+}
+
+.text
+{
+  margin: 0 1.5em;
+
+}
+
+@media (max-width: 768px)
+{
+  .contenedorCards
+  {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .card
+  {
+    width: 90%;
+  }
+
+  .button
+  {
+    width: 35%;
+    margin: 3% 30%;
+    font-size: 2.5vw;
+    height: 2.5em;
+  }
+
+  .button svg
+  {
+    width: 1.4em;
+    margin: 0 1em;
+  }
+
+  .text
+  {
+    margin: 0 1.5em;
+  }
+
+  .textoIntro
+  {
+    margin: 5% auto;
+    width: 100%;
+  }
+
+  .textoIntro h2
+  {
+    font-size: 5vw;
+  }
+
+  .textoIntro p
+  {
+    font-size: 3.5vw;
+
+  }
+}
+
+.slider
+{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.slides
+{
+  display: flex;
+  width: 300%;
+  height: 100%;
+  animation: slide-animation 12s infinite;
+}
+
+.slide
+{
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.slide img
+{
+  width: 100vw;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+
+/* Animación del slider */
+@keyframes slide-animation
+{
+  0% {
+    transform: translateX(0);
+  }
+
+  33% {
+    transform: translateX(0);
+  }
+
+  36% {
+    transform: translateX(-100%);
+  }
+
+  66% {
+    transform: translateX(-100%);
+  }
+
+  69% {
+    transform: translateX(-200%);
+  }
+
+  99% {
+    transform: translateX(-200%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px)
+{
+  .slider
+  {
+    height: 180px;
+    /* antes 250px */
+  }
+}
+
+.infoSection
+{
+  background-color: #fff;
+  padding: 50px 20px;
+  font-family: "Roboto", sans-serif;
+  color: #181534;
+}
+
+.infoContainer
+{
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.infoContainer h2
+{
+  font-family: "Staatliches", sans-serif;
+  font-size: 2.5vw;
+  margin-bottom: 20px;
+}
+
+.infoContainer p
+{
+  font-size: 1vw;
+  font-weight: 300;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.infoPoints
+{
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.infoPoints article
+{
+  background-color: #f3f3f3;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  min-width: 280px;
+}
+
+.infoPoints h3
+{
+  font-size: 1.3vw;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.infoPoints p
+{
+  font-size: 0.9vw;
+  color: #555;
+}
+
+@media (max-width: 768px)
+{
+  .infoContainer h2
+  {
+    font-size: 5vw;
+  }
+
+  .infoContainer p
+  {
+    font-size: 3.5vw;
+  }
+
+  .infoPoints
+  {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .infoPoints article
+  {
+    width: 90%;
+  }
+
+  .infoPoints h3
+  {
+    font-size: 4vw;
+  }
+
+  .infoPoints p
+  {
+    font-size: 3vw;
+  }
+}
+
+.faqSection
+{
+  background-color: #181534;
+  color: #fff;
+  padding: 60px 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.faqContainer
+{
+  max-width: 1000px;
+  margin: auto;
+  text-align: left;
+}
+
+.faqContainer h2
+{
+  font-family: "Staatliches", sans-serif;
+  font-size: 2.5vw;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #ffcc00;
+}
+
+.faqItem
+{
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #333;
+  background-color: #252243;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.faqQuestion
+{
+  width: 100%;
+  padding: 20px;
+  background: none;
+  border: none;
+  outline: none;
+  color: #fff;
+  text-align: left;
+  font-size: 1.2vw;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s ease;
+
+}
+
+.faqQuestion::after
+{
+  content: "+";
+  position: absolute;
+  right: 20px;
+  font-size: 1.5vw;
+  transition: transform 0.3s ease;
+}
+
+.faqItem.active .faqQuestion::after {
+  transform: rotate(45deg);
+}
+
+.faqAnswer
+{
+  max-height: 0;
+  overflow: hidden;
+  background-color: #1e1b39;
+  padding: 0 20px;
+  transition:
+    max-height 0.5s ease,
+    padding 0.3s ease;
+}
+
+.faqItem.active .faqAnswer
+{
+  max-height: 300px;
+  padding: 0 20px;
+
+}
+
+.faqAnswer p
+{
+  margin: 10px;
+  font-size: 1vw;
+  line-height: 1.5;
+  color: #ccc;
+}
+
+@media (max-width: 768px)
+{
+  .faqContainer h2
+  {
+    font-size: 5vw;
+  }
+
+  .faqQuestion
+  {
+    font-size: 2.8vw;
+  }
+
+  .faqQuestion::after
+  {
+    font-size: 3.5vw;
+  }
+
+  .faqAnswer p
+  {
+    font-size: 2.4vw;
+  }
+}
+
