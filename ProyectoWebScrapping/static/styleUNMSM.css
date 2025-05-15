@@ -6,25 +6,21 @@ body {
   color: #181534;
 }
 
-.navbar
-{
-    background-color: #800000;
-}
-
-.footer
-{
+.navbar {
   background-color: #800000;
 }
 
-.main-universidad
-{
+.footer {
+  background-color: #800000;
+}
+
+.main-universidad {
   width: 100%;
   margin: auto;
   padding-bottom: 60px;
 }
 
-.banner
-{
+.banner {
   position: relative;
   width: 100%;
   height: 300px;
@@ -32,16 +28,14 @@ body {
   margin-bottom: 40px;
 }
 
-.banner img
-{
+.banner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: brightness(0.4);
 }
 
-.banner-texto
-{
+.banner-texto {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -51,8 +45,7 @@ body {
   width: 70%;
 }
 
-.banner-texto h1
-{
+.banner-texto h1 {
   font-family: 'Staatliches', sans-serif;
   font-size: 3.2vw;
   margin-bottom: 10px;
@@ -64,8 +57,7 @@ body {
 }
 
 .puntajes h2,
-.analisis h2
-{
+.analisis h2 {
   font-family: 'Staatliches', sans-serif;
   font-size: 2.5vw;
   text-align: center;
@@ -74,8 +66,7 @@ body {
 
 }
 
-.tabla-puntajes
-{
+.tabla-puntajes {
   width: 70%;
   border-collapse: separate;
   margin: 20px auto;
@@ -83,13 +74,12 @@ body {
   border-spacing: 0;
 
   background: #ffffff;
-  box-shadow:  20px 20px 60px #d9d9d9,
-               -20px -20px 60px #ffffff;
+  box-shadow: 20px 20px 60px #d9d9d9,
+    -20px -20px 60px #ffffff;
 }
 
 .tabla-puntajes th,
-.tabla-puntajes td
-{
+.tabla-puntajes td {
   padding: 15px;
   border: 1px solid #ccc;
   text-align: center;
@@ -97,8 +87,7 @@ body {
   border: none;
 }
 
-.tabla-puntajes th
-{
+.tabla-puntajes th {
   background-color: #800000;
   color: #fff;
   font-family: "Staatliches", sans-serif;
@@ -106,45 +95,38 @@ body {
   letter-spacing: 2px;
 }
 
-.tabla-puntajes thead th:first-child
-{
+.tabla-puntajes thead th:first-child {
   border-top-left-radius: 20px;
 }
 
-.tabla-puntajes thead th:last-child
-{
+.tabla-puntajes thead th:last-child {
   border-top-right-radius: 20px;
 }
 
-.tabla-puntajes tr:nth-child(even)
-{
+.tabla-puntajes tr:nth-child(even) {
   background-color: #f3f3f3;
 }
 
-.analisis
-{
+.analisis {
   margin-top: 70px;
   text-align: center;
   padding: 0 5%;
 
 }
 
-.analisis p
-{
+.analisis p {
   font-size: 1vw;
   max-width: 800px;
   margin: auto;
   color: #333;
 }
 
-.dashboard
-{
+.dashboard {
   padding: 40px;
   background-color: #ffffff;
 }
 
-.dashboard h2
-{
+.dashboard h2 {
   font-family: "Staatliches", sans-serif;
   font-size: 2.5vw;
   margin-top: 40px;
@@ -153,47 +135,41 @@ body {
   color: #800000;
 }
 
-.grafico
-{
+.grafico {
   margin-bottom: 50px;
   text-align: center;
 }
 
-.grafico img
-{
+.grafico img {
   max-width: 90%;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.tabla-ingresantes
-{
+.tabla-ingresantes {
   width: 80%;
   margin: 0 auto;
 }
 
-.filtro
-{
+.filtro {
   width: 30%;
   margin-bottom: 20px;
   color: #800000;
 }
 
-.filtro label
-{
+.filtro label {
   font-size: 1.3vw;
   font-family: "Staatliches", sans-serif;
 
 }
 
-.tabla-ingresantes select
-{
+.tabla-ingresantes select {
   border: none !important;
   border-radius: 8px;
   background: #ffffff;
-  box-shadow:  5px 5px 20px #d9d9d9,
-               -5px -5px 20px #ffffff;
+  box-shadow: 5px 5px 20px #d9d9d9,
+    -5px -5px 20px #ffffff;
   width: 30%;
   height: 40px;
   margin-left: 1rem;
@@ -203,66 +179,55 @@ body {
   font-size: 1vw;
 }
 
-.tabla-ingresantes select:focus
-{
+.tabla-ingresantes select:focus {
   outline: none;
 }
 
 
 /* Responsive */
 @media (max-width: 768px) {
-  .banner
-  {
+  .banner {
     height: 180px;
   }
 
-  .banner-texto h1
-  {
+  .banner-texto h1 {
     font-size: 5vw;
   }
 
-  .banner-texto p
-  {
+  .banner-texto p {
     font-size: 3.5vw;
   }
 
   .puntajes h2,
-  .analisis h2
-  {
+  .analisis h2 {
     font-size: 5vw;
   }
 
   .tabla-puntajes th,
-  .tabla-puntajes td
-  {
+  .tabla-puntajes td {
     font-size: 2.5vw;
     padding: 10px;
   }
 
-  .analisis p
-  {
+  .analisis p {
     font-size: 3vw;
   }
 
-  .dashboard h2
-  {
+  .dashboard h2 {
     font-size: 5vw;
   }
 
-  .filtro
-  {
+  .filtro {
     width: 40%;
     margin-bottom: 20px;
     color: #800000;
   }
 
-  .filtro label
-  {
+  .filtro label {
     font-size: 3vw;
   }
 
-  .tabla-ingresantes select
-  {
+  .tabla-ingresantes select {
     width: 50%;
     height: 40px;
     margin-left: 1rem;
@@ -272,3 +237,31 @@ body {
   }
 }
 
+.pagination-container {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.pagination-btn {
+  background-color: #181534;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.pagination-btn:hover {
+  background-color: #ffcc00;
+  color: #181534;
+}
+
+.pagination-btn.active {
+  background-color: #ffcc00;
+  color: #181534;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}

@@ -11,7 +11,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Staatliches&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Staatliches&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -38,38 +40,30 @@
         </section>
 
         <section class="puntajes">
-            <h2>Puntajes por carrera (último proceso de admisión)</h2>
-            <table class="tabla-puntajes">
+            <h2>Puntajes por carrera (último proceso de admisión - 2024-2)</h2>
+            <table class="tabla-puntajes" id="tabla-puntajes-resumen">
                 <thead>
                     <tr>
                         <th>Carrera</th>
-                        <th>Área</th>
                         <th>Puntaje Mínimo</th>
                         <th>Puntaje Máximo</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tablaResumenBody">
+                    {% for fila in resumen %}
                     <tr>
-                        <td>Medicina</td>
-                        <td>Área de Ciencias de la Salud</td>
-                        <td>1480</td>
-                        <td>1860</td>
+                        <td>{{ fila['Escuela Profesional'] }}</td>
+                        <td>{{ "%.2f"|format(fila['Puntaje_Min']) }}</td>
+                        <td>{{ "%.2f"|format(fila['Puntaje_Max']) }}</td>
                     </tr>
-                    <tr>
-                        <td>Ingeniería Industrial</td>
-                        <td>Área de Ingenierías</td>
-                        <td>1350</td>
-                        <td>1650</td>
-                    </tr>
-                    <tr>
-                        <td>Derecho</td>
-                        <td>Área de Humanidades</td>
-                        <td>1250</td>
-                        <td>1530</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
+
+            <div class="pagination-container" id="paginationResumen"></div>
         </section>
+
+
 
         <section class="analisis">
             <h2>¿Qué significan estos puntajes?</h2>
@@ -81,16 +75,6 @@
             </p>
         </section>
 
-        <section class="dashboard">
-            <h2>Análisis de Ingresantes</h2>
-            <p>Ruta test:</p>
-            <img src="/static/img/top_carreras.png" alt="Test gráfico directo">
-            <img src="{{ url_for('static', filename='img/top_carreras.png') }}" alt="Top carreras">
-            <img src="{{ url_for('static', filename='img/ingresantes_periodo.png') }}" alt="Distribución por periodo">
-            <img src="{{ url_for('static', filename='img/evolucion_top5.png') }}" alt="Evolución por carrera">
-        </section>
-
-
         <section class="tabla-ingresantes">
             <div class="filtro">
                 <label for="periodoFiltro">PERÍODO:</label>
@@ -101,7 +85,7 @@
                 </select>
             </div>
 
-            <table id="tabla-ingresantes" class="display" >
+            <table id="tabla-ingresantes" class="display">
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -213,6 +197,45 @@
             });
         });
     </script>
+    <script>
+        function paginarResumen() {
+            const filas = document.querySelectorAll("#tablaResumenBody tr");
+            const filasPorPagina = 10;
+            const totalPaginas = Math.ceil(filas.length / filasPorPagina);
+            const contenedor = document.getElementById("paginationResumen");
+
+            function mostrarPagina(pagina) {
+                filas.forEach((fila, i) => {
+                    fila.style.display = (i >= (pagina - 1) * filasPorPagina && i < pagina * filasPorPagina) ? "" : "none";
+                });
+
+                // Actualiza estilos activos
+                document.querySelectorAll(".pagination-btn").forEach(btn => btn.classList.remove("active"));
+                document.querySelector(`.pagination-btn[data-pagina='${pagina}']`).classList.add("active");
+            }
+
+            // Limpiar contenedor
+            contenedor.innerHTML = "";
+
+            // Crear botones
+            for (let i = 1; i <= totalPaginas; i++) {
+                const btn = document.createElement("button");
+                btn.innerText = i;
+                btn.classList.add("pagination-btn");
+                btn.dataset.pagina = i;
+                btn.onclick = () => mostrarPagina(i);
+                contenedor.appendChild(btn);
+            }
+
+            // Mostrar primera página al inicio
+            if (totalPaginas > 0) {
+                mostrarPagina(1);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", paginarResumen);
+    </script>
+
 </body>
 
 </html>

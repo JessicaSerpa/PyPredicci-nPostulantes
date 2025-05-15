@@ -17,7 +17,24 @@ df_total.fillna("", inplace=True)
 
 @app.route("/")
 def home():
-    return render_template("sanmarcos.html")  # Nuevo template para server-side
+    # Filtrar solo los que alcanzaron vacante en 2024-2
+    df_filtrado = df_total[
+        (df_total["Periodo"] == "2024-2") &
+        (df_total["Observaciones"].str.contains("ALCANZO", na=False, case=False))
+    ]
+
+    # Crear resumen de puntajes por carrera
+    resumen = (
+        df_filtrado.groupby("Escuela Profesional")
+        .agg(Puntaje_Min=("Puntaje final", "min"), Puntaje_Max=("Puntaje final", "max"))
+        .reset_index()
+        .sort_values("Puntaje_Max", ascending=False)
+        .to_dict(orient="records")
+    )
+
+    # Enviamos el resumen al HTML
+    return render_template("sanmarcos.html", resumen=resumen)
+
 
 @app.route("/data")
 def data():
