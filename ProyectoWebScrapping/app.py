@@ -60,5 +60,34 @@ def data():
         "data": data
     })
 
+
+@app.route("/predecir_carrera")
+def predecir_carrera():
+    try:
+        puntaje = float(request.args.get("puntaje"))
+    except:
+        return jsonify({"error": "Puntaje inválido", "carreras": []})
+
+    # Usar resumen del último periodo
+    df_filtrado = df_total[
+        (df_total["Periodo"] == "2024-2") & 
+        (df_total["Observaciones"].str.contains("ALCANZO", na=False, case=False))
+    ]
+
+    resumen = (
+        df_filtrado.groupby("Escuela Profesional")
+        .agg(Puntaje_Min=("Puntaje final", "min"), Puntaje_Max=("Puntaje final", "max"))
+        .reset_index()
+    )
+    posibles = resumen[resumen["Puntaje_Min"] <= puntaje].sort_values("Puntaje_Min")
+    # Puedes limitar a las 5 carreras más cercanas, si quieres
+    carreras = posibles.to_dict(orient="records")
+    # Opcional: cambia el nombre de columnas para JS (sin espacios)
+    for c in carreras:
+        c["Escuela_Profesional"] = c.pop("Escuela Profesional")
+        c["Puntaje_Min"] = round(c["Puntaje_Min"],2)
+    return jsonify({"carreras": carreras})
+
+
 if __name__ == "__main__":
     app.run(debug=True)
