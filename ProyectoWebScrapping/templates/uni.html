@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNMSM - PredictU</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header_footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleUNMSM.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleUni.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Staatliches&display=swap"
+        rel="stylesheet">
+</head>
+<header>
+    <nav class="navbar">
+        <div class="logo">PREDICT<span>U</span></div>
+        <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="#">Universidades</a></li>
+            <li><a href="#">Estadísticas</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="main-universidad">
+    <section class="banner">
+        <img src="{{ url_for('static', filename='villareal.png') }}" alt="UNFV" />
+        <div class="banner-texto">
+            <h1>Universidad Nacional De Ingenieria</h1>
+            <p>Consulta los puntajes necesarios para postular a las distintas carreras.</p>
+        </div>
+    </section>
+
+    <section class="puntajes">
+        <h2>Puntajes por carrera (último proceso de admisión - 2024-2)</h2>
+        <table class="tabla-puntajes" id="tabla-puntajes-resumen">
+            <thead>
+                <tr>
+                    <th>Carrera</th>
+                    <th>Puntaje Mínimo</th>
+                    <th>Puntaje Máximo</th>
+                </tr>
+            </thead>
+            <tbody id="tablaResumenBody">
+                {% for fila in resumen %}
+                <tr>
+                    <td>{{ fila['Escuela Profesional'] }}</td>
+                    <td>{{ "%.2f"|format(fila['Puntaje_Min']) }}</td>
+                    <td>{{ "%.2f"|format(fila['Puntaje_Max']) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="pagination-container" id="paginationResumen"></div>
+    </section>
+
+
+    <button id="abrirSimulacro" class="btn-simulacro">
+        <img src="https://cdn-icons-png.flaticon.com/128/3094/3094179.png" alt="Simulacro"
+            style="width:24px;vertical-align:middle;margin-right:6px;">
+        ¡Haz tu Simulacro UNMSM!
+    </button>
+
+    <section class="analisis">
+        <h2>¿Qué significan estos puntajes?</h2>
+        <p>
+            Los puntajes reflejan el rendimiento de los postulantes en los últimos procesos de admisión. El puntaje
+            mínimo indica cuál fue el último puntaje que permitió el ingreso a determinada carrera, mientras que el
+            máximo muestra el mejor puntaje obtenido. Esta información puede ayudarte a fijar una meta realista y
+            evaluar tus probabilidades de ingreso.
+        </p>
+    </section>
+
+    <section class="tabla-ingresantes">
+        <div class="filtro">
+            <label for="periodoFiltro">PERÍODO:</label>
+            <select class="periodoFiltro" id="periodoFiltro">
+                <option value="2024-2" selected>2024-2</option>
+                <option value="2024-1">2024-1</option>
+                <option value="2023-2">2023-2</option>
+            </select>
+        </div>
+
+        <table id="tabla-ingresantes" class="display">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Apellidos</th>
+                    <th>Nombres</th>
+                    <th>Escuela Profesional</th>
+                    <th>Puntaje final</th>
+                    <th>Mérito Alcanzado</th>
+                    <th>Observaciones</th>
+                    <th>Periodo</th>
+                    <th>Escuela Segunda Opción</th>
+                </tr>
+            </thead>
+        </table>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section about">
+            <h3>PredictU</h3>
+            <p>Plataforma educativa para ayudarte a tomar decisiones estratégicas sobre tu futuro universitario.</p>
+        </div>
+        <div class="footer-section links">
+            <h4>Enlaces útiles</h4>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="#">Universidades</a></li>
+                <li><a href="#">Estadísticas</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h4>Contacto</h4>
+            <p>Email: soporte@predictu.pe</p>
+            <p>Teléfono: +51 999 123 456</p>
+            <p>Dirección: Lima, Perú</p>
+        </div>
+
+        <div class="footer-section social">
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733547.png" alt="Facebook"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733579.png" alt="Twitter"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733558.png" alt="Instagram"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/3536/3536505.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 PredictU. Todos los derechos reservados.</p>
+    </div>
+</footer>
+<!-- Modal Simulacro -->
+<div id="modalSimulacro" class="modal-simulacro">
+    <div class="modal-contenido">
+        <span class="cerrar-modal" id="cerrarSimulacro">&times;</span>
+        <h2><img src="https://cdn-icons-png.flaticon.com/512/2428/2428582.png" alt="Icono UNMSM"
+                style="width:32px;vertical-align:middle;"> Simulacro UNI</h2>
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+        <form id="formSimulacro">
+            <div class="pregunta" data-indice="0">
+                <p>1. ¿Cuál es la capital de Perú?</p>
+                <label><input type="radio" name="p0" value="1"> Lima</label>
+                <label><input type="radio" name="p0" value="0"> Arequipa</label>
+                <label><input type="radio" name="p0" value="0"> Iquitos</label>
+            </div>
+            <div class="pregunta" data-indice="1" style="display:none;">
+                <p>2. ¿Quién escribió <i>Cien años de soledad</i>?</p>
+                <label><input type="radio" name="p1" value="1"> Gabriel García Márquez</label>
+                <label><input type="radio" name="p1" value="0"> Mario Vargas Llosa</label>
+                <label><input type="radio" name="p1" value="0"> Julio Cortázar</label>
+            </div>
+            <div class="pregunta" data-indice="2" style="display:none;">
+                <p>3. ¿Cuál es el resultado de 8 × 7?</p>
+                <label><input type="radio" name="p2" value="0"> 54</label>
+                <label><input type="radio" name="p2" value="1"> 56</label>
+                <label><input type="radio" name="p2" value="0"> 63</label>
+            </div>
+            <div class="pregunta" data-indice="3" style="display:none;">
+                <p>4. ¿Quién fue el primer presidente del Perú independiente?</p>
+                <label><input type="radio" name="p3" value="0"> Simón Bolívar</label>
+                <label><input type="radio" name="p3" value="1"> José de la Riva Agüero</label>
+                <label><input type="radio" name="p3" value="0"> Ramón Castilla</label>
+            </div>
+            <div class="pregunta" data-indice="4" style="display:none;">
+                <p>5. ¿Cuál es el elemento químico con símbolo O?</p>
+                <label><input type="radio" name="p4" value="1"> Oxígeno</label>
+                <label><input type="radio" name="p4" value="0"> Oro</label>
+                <label><input type="radio" name="p4" value="0"> Osmio</label>
+            </div>
+            <div class="pregunta" data-indice="5" style="display:none;">
+                <p>6. La raíz cuadrada de 144 es:</p>
+                <label><input type="radio" name="p5" value="1"> 12</label>
+                <label><input type="radio" name="p5" value="0"> 14</label>
+                <label><input type="radio" name="p5" value="0"> 16</label>
+            </div>
+            <div class="pregunta" data-indice="6" style="display:none;">
+                <p>7. ¿En qué año se proclamó la independencia del Perú?</p>
+                <label><input type="radio" name="p6" value="0"> 1820</label>
+                <label><input type="radio" name="p6" value="1"> 1821</label>
+                <label><input type="radio" name="p6" value="0"> 1824</label>
+            </div>
+            <div class="pregunta" data-indice="7" style="display:none;">
+                <p>8. ¿Cuál es el río más largo del mundo?</p>
+                <label><input type="radio" name="p7" value="0"> Nilo</label>
+                <label><input type="radio" name="p7" value="1"> Amazonas</label>
+                <label><input type="radio" name="p7" value="0"> Yangtsé</label>
+            </div>
+            <div class="pregunta" data-indice="8" style="display:none;">
+                <p>9. ¿Qué tipo de célula no tiene núcleo definido?</p>
+                <label><input type="radio" name="p8" value="1"> Procariota</label>
+                <label><input type="radio" name="p8" value="0"> Eucariota</label>
+                <label><input type="radio" name="p8" value="0"> Vegetal</label>
+            </div>
+            <div class="pregunta" data-indice="9" style="display:none;">
+                <p>10. ¿Cuál es el principal órgano de la fotosíntesis en las plantas?</p>
+                <label><input type="radio" name="p9" value="1"> Hoja</label>
+                <label><input type="radio" name="p9" value="0"> Raíz</label>
+                <label><input type="radio" name="p9" value="0"> Flor</label>
+            </div>
+            <div id="feedbackSimulacro"></div>
+            <div id="simulacroControles">
+                <button type="button" id="btnAnterior" disabled>Anterior</button>
+                <button type="button" id="btnSiguiente">Siguiente</button>
+                <button type="submit" id="btnEnviar" style="display:none;">Enviar</button>
+            </div>
+        </form>
+
+        <div id="resultadoSimulacro" style="display:none;text-align:center;"></div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+    let tabla;
+
+    function cargarTabla(periodo = "2024-2") {
+        if (tabla) {
+            tabla.destroy();
+        }
+
+        tabla = $('#tabla-ingresantes').DataTable({
+            serverSide: true,
+            processing: true,
+            ajax: {
+                url: "/data",
+                data: { periodo: periodo }
+            },
+            pageLength: 10,
+            language: {
+                search: "Buscar:",
+                paginate: {
+                    previous: "Anterior",
+                    next: "Siguiente"
+                },
+                info: "Mostrando _START_ a _END_ de _TOTAL_ ingresos",
+                infoEmpty: "No hay datos disponibles",
+                zeroRecords: "No se encontraron registros"
+            },
+            columns: [
+                { data: "Código" },
+                { data: "Apellidos" },
+                { data: "Nombres" },
+                { data: "Escuela Profesional" },
+                { data: "Puntaje final" },
+                { data: "Mérito Alcanzado" },
+                { data: "Observaciones" },
+                { data: "Periodo" },
+                { data: "Escuela Segunda Opción" }
+            ]
+        });
+    }
+
+    $(document).ready(function () {
+        cargarTabla();
+
+        $('#periodoFiltro').on('change', function () {
+            const periodo = $(this).val();
+            cargarTabla(periodo);
+        });
+
+        const toggle = document.getElementById("menu-toggle");
+        const navLinks = document.getElementById("nav-links");
+        toggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+    });
+</script>
+<script>
+    function paginarResumen() {
+        const filas = document.querySelectorAll("#tablaResumenBody tr");
+        const filasPorPagina = 10;
+        const totalPaginas = Math.ceil(filas.length / filasPorPagina);
+        const contenedor = document.getElementById("paginationResumen");
+
+        function mostrarPagina(pagina) {
+            filas.forEach((fila, i) => {
+                fila.style.display = (i >= (pagina - 1) * filasPorPagina && i < pagina * filasPorPagina) ? "" : "none";
+            });
+
+            // Actualiza estilos activos
+            document.querySelectorAll(".pagination-btn").forEach(btn => btn.classList.remove("active"));
+            document.querySelector(`.pagination-btn[data-pagina='${pagina}']`).classList.add("active");
+        }
+
+        // Limpiar contenedor
+        contenedor.innerHTML = "";
+
+        // Crear botones
+        for (let i = 1; i <= totalPaginas; i++) {
+            const btn = document.createElement("button");
+            btn.innerText = i;
+            btn.classList.add("pagination-btn");
+            btn.dataset.pagina = i;
+            btn.onclick = () => mostrarPagina(i);
+            contenedor.appendChild(btn);
+        }
+
+        // Mostrar primera página al inicio
+        if (totalPaginas > 0) {
+            mostrarPagina(1);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", paginarResumen);
+</script>
+<script>
+    const abrirSimulacro = document.getElementById('abrirSimulacro');
+    const modalSimulacro = document.getElementById('modalSimulacro');
+    const cerrarSimulacro = document.getElementById('cerrarSimulacro');
+    const preguntas = document.querySelectorAll('.pregunta');
+    const progreso = document.getElementById('progress-bar');
+    const btnAnterior = document.getElementById('btnAnterior');
+    const btnSiguiente = document.getElementById('btnSiguiente');
+    const btnEnviar = document.getElementById('btnEnviar');
+    const formSimulacro = document.getElementById('formSimulacro');
+    const feedbackSimulacro = document.getElementById('feedbackSimulacro');
+    const resultadoSimulacro = document.getElementById('resultadoSimulacro');
+    let indice = 0;
+
+    function mostrarPregunta(i) {
+        preguntas.forEach((q, idx) => q.style.display = (i === idx) ? 'block' : 'none');
+        btnAnterior.disabled = i === 0;
+        btnSiguiente.style.display = (i < preguntas.length - 1) ? 'inline-block' : 'none';
+        btnEnviar.style.display = (i === preguntas.length - 1) ? 'inline-block' : 'none';
+        // Actualizar barra de progreso
+        progreso.style.width = `${((i + 1) / preguntas.length) * 100}%`;
+        feedbackSimulacro.innerHTML = "";
+    }
+
+    abrirSimulacro.onclick = function () {
+        modalSimulacro.style.display = 'flex';
+        indice = 0;
+        mostrarPregunta(indice);
+        formSimulacro.reset();
+        resultadoSimulacro.style.display = 'none';
+        formSimulacro.style.display = 'block';
+    };
+
+    cerrarSimulacro.onclick = function () { modalSimulacro.style.display = 'none'; };
+    window.onclick = function (e) { if (e.target === modalSimulacro) modalSimulacro.style.display = 'none'; };
+
+    btnAnterior.onclick = function () {
+        if (indice > 0) { indice--; mostrarPregunta(indice); }
+    };
+    btnSiguiente.onclick = function () {
+        // Feedback inmediato
+        const respuesta = document.querySelector(`input[name="p${indice}"]:checked`);
+        if (!respuesta) {
+            feedbackSimulacro.innerHTML = `<span style="color:#c62828;"><img src="https://cdn-icons-png.flaticon.com/512/753/753345.png" width="18" style="vertical-align:middle;"> Selecciona una respuesta para continuar.</span>`;
+            return;
+        }
+        // Feedback correcto/incorrecto
+        if (respuesta.value == "1") {
+            feedbackSimulacro.innerHTML = `<span style="color:#43a047;"><img src="https://cdn-icons-png.flaticon.com/512/845/845646.png" width="18" style="vertical-align:middle;"> ¡Correcto!</span>`;
+        } else {
+            feedbackSimulacro.innerHTML = `<span style="color:#c62828;"><img src="https://cdn-icons-png.flaticon.com/512/753/753345.png" width="18" style="vertical-align:middle;"> Respuesta incorrecta.</span>`;
+        }
+        setTimeout(() => {
+            indice++;
+            mostrarPregunta(indice);
+        }, 800);
+    };
+
+    formSimulacro.onsubmit = async function (e) {
+        e.preventDefault();
+        // Feedback última pregunta
+        const respuesta = document.querySelector(`input[name="p${indice}"]:checked`);
+        if (!respuesta) {
+            feedbackSimulacro.innerHTML = `<span style="color:#c62828;"><img src="https://cdn-icons-png.flaticon.com/512/753/753345.png" width="18" style="vertical-align:middle;"> Selecciona una respuesta para continuar.</span>`;
+            return;
+        }
+        if (respuesta.value == "1") {
+            feedbackSimulacro.innerHTML = `<span style="color:#43a047;"><img src="https://cdn-icons-png.flaticon.com/512/845/845646.png" width="18" style="vertical-align:middle;"> ¡Correcto!</span>`;
+        } else {
+            feedbackSimulacro.innerHTML = `<span style="color:#c62828;"><img src="https://cdn-icons-png.flaticon.com/512/753/753345.png" width="18" style="vertical-align:middle;"> Respuesta incorrecta.</span>`;
+        }
+
+        // Calcular puntaje
+        let puntaje = 0;
+        preguntas.forEach((q, idx) => {
+            const r = document.querySelector(`input[name="p${idx}"]:checked`);
+            if (r) puntaje += parseInt(r.value);
+        });
+        let puntajeFinal = puntaje * 200; // Ajusta según lógica real
+
+        // Espera un momento y muestra resultado
+        setTimeout(async () => {
+            formSimulacro.style.display = 'none';
+            resultadoSimulacro.style.display = 'block';
+            resultadoSimulacro.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/446/446991.png" width="50"><h3>Tu puntaje: ${puntajeFinal}</h3><img src="https://cdn-icons-png.flaticon.com/512/3208/3208707.png" width="24" style="vertical-align:middle;margin-right:6px;"><span style="font-weight:600;color:#555;">Calculando carreras posibles...</span>`;
+            // ¡Aquí está el fetch!
+            const resp = await fetch(`/predecir_carrera?puntaje=${puntajeFinal}`);
+            const data = await resp.json();
+
+            setTimeout(() => {
+                if (data.carreras && data.carreras.length) {
+                    let html = `
+            <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" width="28" style="vertical-align:middle;">
+            <span style="font-size:18px;font-weight:600;">Podrías ingresar a las siguientes carreras:</span>
+            <div class="tabla-carreras-container">
+            <table class="tabla-carreras">
+                <thead>
+                    <tr>
+                        <th><img src="https://cdn-icons-png.flaticon.com/512/565/565547.png" width="20" style="vertical-align:middle;"> Escuela Profesional</th>
+                        <th><img src="https://cdn-icons-png.flaticon.com/512/3784/3784579.png" width="18" style="vertical-align:middle;"> Puntaje Mínimo</th>
+                        <th><img src="https://cdn-icons-png.flaticon.com/512/2223/2223615.png" width="18" style="vertical-align:middle;"> Puntaje Máximo</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+                    data.carreras.forEach(c => {
+                        html += `<tr>
+                <td>${c.Escuela_Profesional}</td>
+                <td>${c.Puntaje_Min}</td>
+                <td>${c.Puntaje_Max}</td>
+            </tr>`;
+                    });
+                    html += `
+                </tbody>
+            </table>
+            </div>
+        `;
+                    resultadoSimulacro.innerHTML += html;
+                } else {
+                    resultadoSimulacro.innerHTML += `<p style="color:#c62828;font-weight:500;">No alcanzarías el puntaje mínimo de ninguna carrera en el último proceso.</p>`;
+                }
+            }, 1000);
+        }, 800);
+    };
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+# Archivos del IDE
+.idea/
+
+# Archivos de Python compilados
+__pycache__/
+*.py[cod]
+
+# Entornos virtuales (por si lo creas luego)
+venv/
+.env
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de logs o salidas si los generas
+*.log
+
+# Scratches y consolas (IntelliJ)
+*.sci

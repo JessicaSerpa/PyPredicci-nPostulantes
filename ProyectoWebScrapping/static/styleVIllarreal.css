@@ -1,0 +1,11 @@
+.navbar, .footer, .tabla-puntajes th
+{
+  background-color: #c45c08;
+}
+
+.puntajes h2,
+.analisis h2
+{
+    color: #c45c08;
+}
+
