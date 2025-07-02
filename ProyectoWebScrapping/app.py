@@ -3,7 +3,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-# Leer y combinar todos los CSV al inicio
+# Leer y combinar los CSV de unmsm al inicio
 df_2023 = pd.read_csv("data/ingresantes_unmsm_2023-2.csv")
 df_2024_1 = pd.read_csv("data/ingresantes_unmsm_2024-1.csv")
 df_2024_2 = pd.read_csv("data/ingresantes_unmsm_2024-2.csv")
@@ -15,7 +15,35 @@ df_2024_2["Periodo"] = "2024-2"
 df_total = pd.concat([df_2023, df_2024_1, df_2024_2], ignore_index=True)
 df_total.fillna("", inplace=True)
 
+# Datos villarreal
+dfv_2023 = pd.read_csv("data/ingresantes_unfv_2023-2.csv")
+dfv_2024_1 = pd.read_csv("data/ingresantes_unfv_2024-1.csv")
+dfv_2024_2 = pd.read_csv("data/ingresantes_unfv_2024-2.csv")
+
+dfv_2023["Periodo"] = "2023-2"
+dfv_2024_1["Periodo"] = "2024-1"
+dfv_2024_2["Periodo"] = "2024-2"
+
+dfv_total = pd.concat([dfv_2023, dfv_2024_1, dfv_2024_2], ignore_index=True)
+dfv_total.fillna("", inplace=True)
+
+# Datos Uni
+dfu_2023 = pd.read_csv("data/ingresantes_uni_2023-2.csv")
+dfu_2024_1 = pd.read_csv("data/ingresantes_uni_2024-1.csv")
+dfu_2024_2 = pd.read_csv("data/ingresantes_uni_2024-2.csv")
+
+dfu_2023["Periodo"] = "2023-2"
+dfu_2024_1["Periodo"] = "2024-1"
+dfu_2024_2["Periodo"] = "2024-2"
+
+dfu_total = pd.concat([dfu_2023, dfu_2024_1, dfu_2024_2], ignore_index=True)
+dfu_total.fillna("", inplace=True)
+
 @app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/UNMSM")
 def home():
     # Filtrar solo los que alcanzaron vacante en 2024-2
     df_filtrado = df_total[
@@ -34,6 +62,47 @@ def home():
 
     # Enviamos el resumen al HTML
     return render_template("sanmarcos.html", resumen=resumen)
+
+
+@app.route("/UNFV")
+def unfv():
+    # Filtrar solo los que alcanzaron vacante en 2024-2
+    df_filtrado = dfv_total[
+        (dfv_total["Periodo"] == "2024-2") &
+        (dfv_total["Observaciones"].str.contains("ALCANZO", na=False, case=False))
+    ]
+
+    # Crear resumen de puntajes por carrera
+    resumen = (
+        df_filtrado.groupby("Escuela Profesional")
+        .agg(Puntaje_Min=("Puntaje final", "min"), Puntaje_Max=("Puntaje final", "max"))
+        .reset_index()
+        .sort_values("Puntaje_Max", ascending=False)
+        .to_dict(orient="records")
+    )
+
+    # Enviamos el resumen al HTML
+    return render_template("villarreal.html", resumen=resumen)
+
+@app.route("/UNI")
+def uni():
+    # Filtrar solo los que alcanzaron vacante en 2024-2
+    df_filtrado = dfu_total[
+        (dfu_total["Periodo"] == "2024-2") &
+        (dfu_total["Observaciones"].str.contains("ALCANZO", na=False, case=False))
+    ]
+
+    # Crear resumen de puntajes por carrera
+    resumen = (
+        df_filtrado.groupby("Escuela Profesional")
+        .agg(Puntaje_Min=("Puntaje final", "min"), Puntaje_Max=("Puntaje final", "max"))
+        .reset_index()
+        .sort_values("Puntaje_Max", ascending=False)
+        .to_dict(orient="records")
+    )
+
+    # Enviamos el resumen al HTML
+    return render_template("uni.html", resumen=resumen)
 
 
 @app.route("/data")
