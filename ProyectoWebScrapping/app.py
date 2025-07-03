@@ -105,8 +105,8 @@ def uni():
     return render_template("uni.html", resumen=resumen)
 
 
-@app.route("/data")
-def data():
+@app.route("/data-sanmarcos")
+def dataSanMarcos():
     draw = request.args.get("draw", type=int)
     start = request.args.get("start", type=int)
     length = request.args.get("length", type=int)
@@ -129,6 +129,53 @@ def data():
         "data": data
     })
 
+@app.route("/data-uni")
+def dataUni():
+    draw = request.args.get("draw", type=int)
+    start = request.args.get("start", type=int)
+    length = request.args.get("length", type=int)
+    search_value = request.args.get("search[value]", "")
+    periodo_filtro = request.args.get("periodo", "2024-2")
+
+    # Filtrar por periodo y búsqueda
+    df_filtrado = dfu_total[dfu_total["Periodo"] == periodo_filtro]
+
+    if search_value:
+        df_filtrado = df_filtrado[df_filtrado.apply(lambda row: row.astype(str).str.contains(search_value, case=False).any(), axis=1)]
+
+    total = df_filtrado.shape[0]
+    data = df_filtrado.iloc[start:start + length].to_dict(orient="records")
+
+    return jsonify({
+        "draw": draw,
+        "recordsTotal": total,
+        "recordsFiltered": total,
+        "data": data
+    })
+
+@app.route("/data-villarreal")
+def dataVillarreal():
+    draw = request.args.get("draw", type=int)
+    start = request.args.get("start", type=int)
+    length = request.args.get("length", type=int)
+    search_value = request.args.get("search[value]", "")
+    periodo_filtro = request.args.get("periodo", "2024-2")
+
+    # Filtrar por periodo y búsqueda
+    df_filtrado = dfv_total[dfv_total["Periodo"] == periodo_filtro]
+
+    if search_value:
+        df_filtrado = df_filtrado[df_filtrado.apply(lambda row: row.astype(str).str.contains(search_value, case=False).any(), axis=1)]
+
+    total = df_filtrado.shape[0]
+    data = df_filtrado.iloc[start:start + length].to_dict(orient="records")
+
+    return jsonify({
+        "draw": draw,
+        "recordsTotal": total,
+        "recordsFiltered": total,
+        "data": data
+    })
 
 @app.route("/predecir_carrera")
 def predecir_carrera():
