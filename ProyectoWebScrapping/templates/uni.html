@@ -66,7 +66,7 @@
     <button id="abrirSimulacro" class="btn-simulacro">
         <img src="https://cdn-icons-png.flaticon.com/128/3094/3094179.png" alt="Simulacro"
             style="width:24px;vertical-align:middle;margin-right:6px;">
-        ¡Haz tu Simulacro UNMSM!
+        ¡Haz tu Simulacro UNI!
     </button>
 
     <section class="analisis">
@@ -105,6 +105,14 @@
             </thead>
         </table>
     </section>
+    <div class="export-buttons">
+        <a href="#" id="exportExcel" class="btn-export-excel">
+            📥 Exportar Excel
+        </a>
+        <a href="#" id="exportPDF" class="btn-export-pdf">
+            📄 Exportar PDF
+        </a>
+    </div>
 </main>
 
 <footer class="footer">
@@ -227,6 +235,23 @@
 
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $('#exportExcel').click(function (e) {
+        e.preventDefault();
+        const periodo = $('#periodoFiltro').val();
+        const search = $('.dataTables_filter input').val();
+        window.open(`/exportar-excel/UNI?periodo=${periodo}&search=${search}`, '_blank');
+    });
+
+    $('#exportPDF').click(function (e) {
+        e.preventDefault();
+        const periodo = $('#periodoFiltro').val();
+        const search = $('.dataTables_filter input').val();
+        window.open(`/exportar-pdf/UNI?periodo=${periodo}&search=${search}`, '_blank');
+    });
+</script>
+
 <script>
     let tabla;
 

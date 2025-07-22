@@ -485,3 +485,40 @@ body {
     font-size: .95rem;
   }
 }
+
+
+.export-buttons {
+    margin: 1.5em 0;
+    text-align: center;
+}
+
+.btn-export-excel,
+.btn-export-pdf {
+    display: inline-block;
+    padding: 10px 18px;
+    margin: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.btn-export-excel {
+    background-color: #2e7d32;
+    color: #fff;
+}
+
+.btn-export-excel:hover {
+    background-color: #1b5e20;
+}
+
+.btn-export-pdf {
+    background-color: #c62828;
+    color: #fff;
+}
+
+.btn-export-pdf:hover {
+    background-color: #8e0000;
+}
